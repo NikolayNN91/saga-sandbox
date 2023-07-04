@@ -1,12 +1,12 @@
 package com.example.xtransactionsandbox.controller;
 
-import com.example.xtransactionsandbox.entity.AccountEntity;
-import com.example.xtransactionsandbox.entity.MerchandiseEntity;
-import com.example.xtransactionsandbox.entity.OrderEntity;
-import com.example.xtransactionsandbox.service.AccountService;
-import com.example.xtransactionsandbox.service.OrderService;
-import com.example.xtransactionsandbox.service.PurchaseOfGoodsService;
-import com.example.xtransactionsandbox.service.StockService;
+import com.example.xtransactionsandbox.entity.jpa.mysql.AccountJpaEntity;
+import com.example.xtransactionsandbox.entity.jpa.postgresql.MerchandiseJpaEntity;
+import com.example.xtransactionsandbox.entity.jpa.postgresql.OrderJpaEntity;
+import com.example.xtransactionsandbox.service.jpaservice.AccountJpaService;
+import com.example.xtransactionsandbox.service.jpaservice.OrderJpaService;
+import com.example.xtransactionsandbox.service.jpaservice.PurchaseOfGoodsJpaService;
+import com.example.xtransactionsandbox.service.jpaservice.StockJpaService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GoodsController {
 
-    private final PurchaseOfGoodsService purchaseOfGoodsService;
-    private final OrderService orderService;
-    private final AccountService accountService;
-    private final StockService stockService;
+    private final PurchaseOfGoodsJpaService purchaseOfGoodsService;
+    private final OrderJpaService orderService;
+    private final AccountJpaService accountService;
+    private final StockJpaService stockService;
 
-    public GoodsController(PurchaseOfGoodsService purchaseOfGoodsService, OrderService orderService, AccountService accountService, StockService stockService) {
+    public GoodsController(PurchaseOfGoodsJpaService purchaseOfGoodsService, OrderJpaService orderService, AccountJpaService accountService, StockJpaService stockService) {
         this.purchaseOfGoodsService = purchaseOfGoodsService;
         this.orderService = orderService;
         this.accountService = accountService;
@@ -35,42 +35,42 @@ public class GoodsController {
     }
 
     @PutMapping("/order")
-    public OrderEntity createOrder(@RequestBody OrderEntity order) {
+    public OrderJpaEntity createOrder(@RequestBody OrderJpaEntity order) {
         return orderService.createOrder(order);
     }
 
     @GetMapping("/order/{orderId}")
-    public OrderEntity getOrder(@PathVariable Long orderId) {
+    public OrderJpaEntity getOrder(@PathVariable Long orderId) {
         return orderService.getOrder(orderId);
     }
 
     @PostMapping("/order/{orderId}")
-    public OrderEntity updateOrder(@RequestBody OrderEntity order) {
+    public OrderJpaEntity updateOrder(@RequestBody OrderJpaEntity order) {
         return orderService.updateOrder(order);
     }
 
     @PutMapping("/account")
-    public AccountEntity createAccount(@RequestBody AccountEntity account) {
+    public AccountJpaEntity createAccount(@RequestBody AccountJpaEntity account) {
         return accountService.createAccount(account);
     }
 
     @PostMapping("/account")
-    public AccountEntity updateAccount(@RequestBody AccountEntity account) {
+    public AccountJpaEntity updateAccount(@RequestBody AccountJpaEntity account) {
         return accountService.updateAccount(account);
     }
 
     @GetMapping("/account/{accountId}")
-    public AccountEntity getAccount(@PathVariable Long accountId) {
+    public AccountJpaEntity getAccount(@PathVariable Long accountId) {
         return accountService.getAccount(accountId);
     }
 
     @PutMapping("/merchandise")
-    public MerchandiseEntity createMerchandise(@RequestBody MerchandiseEntity merchandise) {
+    public MerchandiseJpaEntity createMerchandise(@RequestBody MerchandiseJpaEntity merchandise) {
         return stockService.createMerchandise(merchandise);
     }
 
     @GetMapping("/merchandise/{merchandiseId}")
-    public MerchandiseEntity getMerchandise(@PathVariable Long merchandiseId) {
+    public MerchandiseJpaEntity getMerchandise(@PathVariable Long merchandiseId) {
         return stockService.getMerchandise(merchandiseId);
     }
 }

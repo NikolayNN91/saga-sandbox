@@ -1,11 +1,11 @@
 package com.example.xtransactionsandbox.controller;
 
-import com.example.xtransactionsandbox.dao.AccountDao;
-import com.example.xtransactionsandbox.dao.OrderDao;
-import com.example.xtransactionsandbox.dao.StockDao;
-import com.example.xtransactionsandbox.entity.AccountEntity;
-import com.example.xtransactionsandbox.entity.MerchandiseEntity;
-import com.example.xtransactionsandbox.entity.OrderEntity;
+import com.example.xtransactionsandbox.entity.jpa.mysql.AccountJpaEntity;
+import com.example.xtransactionsandbox.entity.jpa.postgresql.MerchandiseJpaEntity;
+import com.example.xtransactionsandbox.entity.jpa.postgresql.OrderJpaEntity;
+import com.example.xtransactionsandbox.repository.mysql.AccountRepository;
+import com.example.xtransactionsandbox.repository.postgresql.GoodsRepository;
+import com.example.xtransactionsandbox.repository.postgresql.OrderRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,21 +15,21 @@ import java.util.List;
 @Controller
 public class MvcController {
 
-    private final AccountDao accountDao;
-    private final OrderDao orderDao;
-    private final StockDao stockDao;
+    private final AccountRepository accountRepository;
+    private final OrderRepository orderRepository;
+    private final GoodsRepository goodsRepository;
 
-    public MvcController(AccountDao accountDao, OrderDao orderDao, StockDao stockDao) {
-        this.accountDao = accountDao;
-        this.orderDao = orderDao;
-        this.stockDao = stockDao;
+    public MvcController(AccountRepository accountRepository, OrderRepository orderRepository, GoodsRepository goodsRepository) {
+        this.accountRepository = accountRepository;
+        this.orderRepository = orderRepository;
+        this.goodsRepository = goodsRepository;
     }
 
     @GetMapping("/dashboard")
     public ModelAndView getMerchandise() {
-        List<AccountEntity> allAccounts = accountDao.getAll();
-        List<OrderEntity> allOrders = orderDao.getAll();
-        List<MerchandiseEntity> allGoods = stockDao.getAll();
+        List<AccountJpaEntity> allAccounts = accountRepository.findAll();
+        List<OrderJpaEntity> allOrders = orderRepository.findAll();
+        List<MerchandiseJpaEntity> allGoods = goodsRepository.findAll();
 
 
         ModelAndView modelAndView = new ModelAndView("dashboard-view");

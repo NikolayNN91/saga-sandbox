@@ -16,4 +16,13 @@
             </column>
         </createTable>
     </changeSet>
+    <!--Added the entity Car-->
+<!--    <changeSet id="20170503041524-5" author="nn">-->
+<!--        <sql>-->
+<!--            GRANT XA_RECOVER_ADMIN ON *.* TO 'df'@'localhost' IDENTIFIED BY 'verysecret';-->
+<!--&#45;&#45;             GRANT ALL PRIVILEGES ON *.* TO 'sd'@'localhost' with grant option;-->
+<!--&#45;&#45;             GRANT GRANT OPTION ON *.* TO 'myuser'@'localhost' IDENTIFIED BY 'secret';-->
+<!--            FLUSH PRIVILEGES;-->
+<!--        </sql>-->
+<!--    </changeSet>-->
 </databaseChangeLog>
