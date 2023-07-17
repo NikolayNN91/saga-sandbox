@@ -44,7 +44,7 @@ public class MysqlConfig {
         atomikosXADataSource.setXaDataSource(mysqlXADataSource);
         atomikosXADataSource.setUniqueResourceName("xads");
         atomikosXADataSource.init();
-        return mysqlXADataSource;
+        return atomikosXADataSource;
     }
 
     @Bean
@@ -57,6 +57,7 @@ public class MysqlConfig {
         properties.put("hibernate.temp.use_jdbc_metadata_defaults", "false");
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         properties.put("hibernate.hbm2ddl.auto", "none");
+        properties.put("hibernate.show_sql", "true");
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);

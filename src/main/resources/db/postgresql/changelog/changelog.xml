@@ -8,13 +8,13 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="customerId" type="bigint">
+            <column name="customer_id" type="bigint">
                 <constraints nullable="false" />
             </column>
-            <column name="sellerId" type="bigint">
+            <column name="seller_id" type="bigint">
                 <constraints nullable="false" />
             </column>
-            <column name="merchandiseId" type="bigint">
+            <column name="merchandise_id" type="bigint">
                 <constraints nullable="false" />
             </column>
             <column name="quantity" type="bigint">

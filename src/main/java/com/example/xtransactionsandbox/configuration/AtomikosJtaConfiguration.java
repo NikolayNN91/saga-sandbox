@@ -27,7 +27,7 @@ public class AtomikosJtaConfiguration {
     @Bean(name = "userTransactionManager", destroyMethod = "close")
     public TransactionManager userTransactionManager() throws SystemException {
         UserTransactionManager transactionManager = new UserTransactionManager();
-        transactionManager.setForceShutdown(false);
+        transactionManager.setForceShutdown(true);
         transactionManager.init();
         return transactionManager;
     }
