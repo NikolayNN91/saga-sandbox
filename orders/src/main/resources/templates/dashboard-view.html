@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>Orders:</p>
+<tbody>
+<tr th:if="${orders.empty}">
+    <td colspan="2"> No Orders Available</td>
+</tr>
+<tr th:each="order : ${orders}">
+    <td> Id = <span th:text="${order.id}"></span></td><br>
+    <td> customer = <span th:text="${order.customerId}"></span></td><br>
+    <td> seller = <span th:text="${order.sellerId}"></span></td><br>
+    <td> goods = <span th:text="${order.merchandiseId}"></span></td><br>
+    <td> quantity = <span th:text="${order.quantity}"></span></td><br>
+    <td> price = <span th:text="${order.price}"></span></td><br>
+    <td> status = <span th:text="${order.status}"></span></td><br><br>
+</tr>
+</tbody>
+
+<br><br>
+<p>Transactional outbox:</p>
+<tbody>
+<tr th:if="${outboxes.empty}">
+    <td colspan="2"> No Outbox Available</td>
+</tr>
+<tr th:each="outbox : ${outboxes}">
+    <td> Id = <span th:text="${outbox.id}"></span></td><br>
+    <td> orderId = <span th:text="${outbox.orderId}"></span></td><br>
+    <td> deliveryStatus = <span th:text="${outbox.deliveryStatus}"></span></td><br>
+    <td> command = <span th:text="${outbox.command}"></span></td><br>
+</tr>
+</tbody>
+
+<br><br>
+<p>Participant events:</p>
+<tbody>
+<tr th:if="${events.empty}">
+    <td colspan="2"> No Events Available</td>
+</tr>
+<tr th:each="event : ${events}">
+    <td> Id = <span th:text="${event.id}"></span></td><br>
+    <td> orderId = <span th:text="${event.orderId}"></span></td><br>
+    <td> replyType = <span th:text="${event.replyType}"></span></td><br>
+    <td> replyStatus = <span th:text="${event.replyStatus}"></span></td><br>
+    <td> command = <span th:text="${event.command}"></span></td><br>
+    <td> messageId = <span th:text="${event.messageId}"></span></td><br>
+</tr>
+</tbody>
+
+</body>
+</html>

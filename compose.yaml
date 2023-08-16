@@ -1,23 +1,65 @@
 services:
-  mysql:
-    image: 'mysql:latest'
-    environment:
-      - 'MYSQL_DATABASE=mydatabase'
-      - 'MYSQL_PASSWORD=secret'
-      - 'MYSQL_ROOT_PASSWORD=verysecret'
-      - 'MYSQL_USER=myuser'
-    ports:
-      - '3306:3306'
-    expose:
-      - 3306
-  postgres:
+  stock_pg:
     image: 'postgres:latest'
     environment:
-      - 'POSTGRES_DB=mydatabase'
+      - 'POSTGRES_DB=stock_pg'
       - 'POSTGRES_PASSWORD=secret'
       - 'POSTGRES_USER=myuser'
-    command: postgres -c max_prepared_transactions=64
     ports:
       - '5432:5432'
     expose:
       - 5432
+  orders_pg:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=orders_pg'
+      - 'POSTGRES_PASSWORD=secret'
+      - 'POSTGRES_USER=myuser'
+    ports:
+      - '5433:5432'
+    expose:
+      - 5433
+  accounts_pg:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=accounts_pg'
+      - 'POSTGRES_PASSWORD=secret'
+      - 'POSTGRES_USER=myuser'
+    ports:
+      - '5434:5432'
+    expose:
+      - 5434
+  activemq:
+    image: apache/activemq-artemis
+    ports:
+      - "5672:5672"
+      - "61613:61613"
+      - "8161:8161"
+      - "61616:61616"
+
+
+
+#  rabbitmq:
+#    image: rabbitmq:management
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#  zookeeper:
+#    image: docker.io/bitnami/zookeeper:3.8
+#    ports:
+#      - "2181:2181"
+#    environment:
+#      - ALLOW_ANONYMOUS_LOGIN=yes
+#  kafka:
+#    image: docker.io/bitnami/kafka:3.4
+#    ports:
+#      - "29092:29092"
+#    environment:
+#      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+#      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+#      - KAFKA_CFG_LISTENERS=PLAINTEXT://localhost:9092
+#      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+#      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT
+#    depends_on:
+#      - zookeeper
+

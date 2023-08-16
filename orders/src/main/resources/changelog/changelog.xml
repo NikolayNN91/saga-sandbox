@@ -1,0 +1,71 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--Added the table orders-->
+    <changeSet id="20170503041524-20" author="nn">
+        <createTable tableName="orders">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="customer_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="seller_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="merchandise_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="quantity" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="price" type="double">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+    <!--Added the transactional outbox table-->
+    <changeSet id="20170503041524-21" author="nn">
+        <createTable tableName="outbox">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="order_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="delivery_status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="command" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+    <!--Added the participant events table-->
+    <changeSet id="20170503041524-32" author="nn">
+        <createTable tableName="participant_events">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="order_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="reply_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="reply_status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="command" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="message_id" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
